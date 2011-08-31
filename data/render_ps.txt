@@ -1,0 +1,32 @@
+#version 150
+#extension GL_ARB_explicit_attrib_location : enable
+
+layout (location = 0) out vec4 Out_Color;
+
+uniform sampler2D tex;
+
+in vec3 xnormal;
+in vec2 xuv;
+
+vec2 frac(vec2 v)
+  {
+    return v - floor(v);
+  }
+
+
+void main()
+{
+	vec4 r = vec4(xnormal * 0.5 + 0.5, 1.0);
+
+
+vec2 uv = frac(xuv*10);
+
+float c = ((uv.x < 0.5)?1.0:0.0) * ((uv.y < 0.5)?1.0:0.0)
+	+ ((uv.x > 0.5)?1.0:0.0) * ((uv.y > 0.5)?1.0:0.0);
+
+r.xyz=  vec3(c);
+
+r.rgb = texture(tex, xuv).rgb;
+
+	Out_Color = r;
+}

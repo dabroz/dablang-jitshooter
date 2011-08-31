@@ -1,0 +1,19 @@
+#version 150
+#extension GL_ARB_explicit_attrib_location : enable
+
+layout (location = 0) in vec3 In_Position;
+layout (location = 1) in vec3 In_Normal;
+layout (location = 2) in vec2 In_Texcoord;
+
+out vec3 xnormal;
+out vec2 xuv;
+
+uniform mat4 mvp;
+
+void main()
+{
+	vec3 pp = In_Position.xyz;
+	gl_Position = mvp * vec4(pp, 1.0);
+	xnormal = In_Normal;
+	xuv = In_Texcoord;
+}
