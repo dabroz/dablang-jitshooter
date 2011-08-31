@@ -15,6 +15,7 @@ Space -- fire
 Licence and additional notes
 
 * source code is MIT-licenced
+* stb_loader.dll is lightweight wrapper for stb_image (http://nothings.org/stb_image.c)
 * Space Frigate model: http://www.turbosquid.com/3d-models/space-3ds-free/588767
 * all other assets are public domain
 
