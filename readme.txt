@@ -1,11 +1,11 @@
-C++ Invaders
-http://github.com/dabroz/dablang-cxxinvaders
+JIT Shooter
+http://github.com/dabroz/dablang-jitshooter
 
 Simple game created with Dab 0.1.
 
 Running:
 
-Easiest way is to copy binary dab.exe into C++ Invaders directory, run it and press F5.
+Easiest way is to copy binary dab.exe into JIT Shooter directory, run it and press F5.
 
 Controls:
 
