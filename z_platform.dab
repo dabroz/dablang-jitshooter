@@ -44,16 +44,116 @@ void LOG(cstring msg)
      byte * bmsg = msg;
      LOG(bmsg);
 }
-void LOG(byte* bmsg)
-{
-		byte* xptr = 0;
-       /* if (globallog == xptr) globallog = fopen("jitlog.txt", "w");
 
-        fwrite(bmsg, 1, strlen(bmsg), globallog);
-        byte * qq = "\r\n";
-        fwrite(qq,1,2,globallog);
-        fflush(globallog);*/
+void reset(byte * buff, int size)
+{
+	for (int i = 0; i < size; i++) buff[i] = 0;
 }
+
+int length(byte * text)
+{
+	int i = 0;
+	while (true)
+	{
+		if (text[i] == 0) return i;
+		i++;
+	}
+	return 0;
+}
+
+void append(byte * buff, byte * text)
+{
+	int start = -1;
+	for (int i = 0; start == -1; i++)
+		if (buff[i] == 0) start = i;
+	int len = length(text);
+	for (int i = 0; i < len; i++)
+		buff[i + start] = text[i];
+}
+
+void SaveLog(byte * msg)
+{
+	byte* xptr = 0;
+	if (globallog == xptr) globallog = fopen("__shooter.txt", "w");
+	fwrite(msg, 1, length(msg), globallog);
+	byte * newline = "\r\n";
+	fwrite(newline, 1, 2, globallog);
+	fflush(globallog);
+}
+
+void LOG(byte* msg)
+{
+	SaveLog(msg);
+}
+
+void LOG(byte * msg, byte * a1)
+{
+	byte<1024> log;
+	byte * plog = log;
+	reset(plog, 1024);
+	append(plog, msg);
+	append(plog, a1);
+	SaveLog(plog);
+}
+
+int mod(int a, int b)
+{
+	return a - (a / b) * b;
+}
+
+void itoa(int i, byte * a)
+{
+	byte<32> bd;
+	byte * b = bd;
+	int p = 0;
+	
+	int minus = 0;
+	
+	if (i == 0)
+	{
+		a[0] = 48;
+		a[1] = 0;
+	}
+	else 
+	{
+		if (i < 0)
+		{
+			minus = 1;
+			i *= -1;
+		}
+		
+		while (i)
+		{
+			b[p] = mod(i, 10);
+			i /= 10;
+			p++;
+		}
+		
+		if (minus)
+		{
+			a[0] = 45;
+		}
+		for (int i = 0; i < p; i++)
+		{
+			a[minus + i] = b[p - i - 1] + 48;
+		}
+		a[minus + p] = 0;
+	}
+}
+
+void LOG(byte * msg, int a1)
+{
+	byte<1024> log;
+	byte<32> num;
+	byte * plog = log;
+	byte * pnum = num;
+	reset(plog, 1024);
+	append(plog, msg);
+	itoa(a1, pnum);
+	append(plog, pnum);
+	SaveLog(plog);
+}
+
 [crt]
 int32 ftell(FILE * stream);
 
@@ -74,9 +174,5 @@ void free(byte * ptr);
 
 [crt]
 int rand();
-
-//extern void load_gl_func();
-
-//extern void breakx();
 
 const uint32 RAND_MAX = 0x7fff;

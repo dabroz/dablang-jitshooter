@@ -185,8 +185,10 @@ int xgame_pumpmsg(HWND hwnd)
     return 1;
 }
 
-int xgame_main()
+int main()
 {
+	LOG("Running JIT shooter...");
+	
     myglcreatecontext();
     cstring qq = glGetString(GL_VERSION);
 
@@ -203,9 +205,4 @@ int xgame_main()
     }
 
     return 0;
-}
-
-int main()
-{
-    return xgame_main();
 }
