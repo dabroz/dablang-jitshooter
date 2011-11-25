@@ -74,7 +74,7 @@ void append(byte * buff, byte * text)
 void SaveLog(byte * msg)
 {
 	byte* xptr = 0;
-	if (globallog == xptr) globallog = fopen("__shooter.txt", "w");
+	if (globallog == xptr) globallog = fopen("__shooter.txt", "wb");
 	fwrite(msg, 1, length(msg), globallog);
 	byte * newline = "\r\n";
 	fwrite(newline, 1, 2, globallog);

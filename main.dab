@@ -190,7 +190,8 @@ int main()
 	LOG("Running JIT shooter...");
 	
     myglcreatecontext();
-    cstring qq = glGetString(GL_VERSION);
+    //cstring qq = glGetString(GL_VERSION);
+	LOG("Using OpenGL: ", glGetString(GL_VERSION));
 
     GameInit();
     zzSetupTime();
