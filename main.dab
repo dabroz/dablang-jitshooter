@@ -46,7 +46,7 @@ BOOL CenterWindow(HWND hwnd)
 	return 1;
 }
 
-uint32 EMPTY_WND_PROC;
+byte * EMPTY_WND_PROC;
 
 void myglcreatecontext()
 {	
@@ -127,6 +127,8 @@ void myglcreatecontext()
 
 	if (!wglMakeCurrent(game_hdc,hRC))									
         ExitWithError("wglMakeCurrent");
+
+	dablang_preload_opengl();
 }
 
 uint32 key_left = 0;
@@ -187,8 +189,7 @@ int xgame_main()
 {
     myglcreatecontext();
     cstring qq = glGetString(GL_VERSION);
-    printf("OpenGL Version [%s]\n",  qq);    
-    load_gl_func();
+
     GameInit();
     zzSetupTime();
 
@@ -208,4 +209,3 @@ int main()
 {
     return xgame_main();
 }
-�
