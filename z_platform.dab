@@ -164,9 +164,6 @@ int fflush(FILE * f);
 int fseek(FILE * stream, int offset, int origin);
 
 [crt]
-int strlen(byte * s);
-
-[crt]
 byte * malloc(uint32 size);
 
 [crt]
