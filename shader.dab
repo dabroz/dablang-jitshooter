@@ -20,7 +20,7 @@ uint32 LoadShaderProgram(byte * fn, int type)
     {
         byte * log = malloc(logLength);
         glGetShaderInfoLog(shader, logLength, &logLength, log);
-        printf("Shader compile log:\n%s\n", log);
+        LOG("Shader compile log:\n", log);
         free(log);
     }
     
@@ -37,13 +37,23 @@ uint32 LoadShaderProgram(byte * fn, int type)
 
 GameShader * ShaderLoad(cstring fname)
 {
+	LOG("Loading shader ", fname);
+	
     GameShader * m = malloc(36);
 	
     byte<64> filename_ps;
     byte<64> filename_vs;
-    sprintf(filename_ps, "data\\%s_ps.txt", fname);
-    sprintf(filename_vs, "data\\%s_vs.txt", fname);
 	
+	reset(filename_ps, 64);
+	append(filename_ps, "data\\");
+	append(filename_ps, fname);
+	append(filename_ps, "_ps.txt");
+	
+	reset(filename_vs, 64);
+	append(filename_vs, "data\\");
+	append(filename_vs, fname);
+	append(filename_vs, "_vs.txt");
+		
     m->program = glCreateProgram();
 	uint32 ps = LoadShaderProgram(filename_ps, GL_FRAGMENT_SHADER);
 	uint32 vs = LoadShaderProgram(filename_vs, GL_VERTEX_SHADER);

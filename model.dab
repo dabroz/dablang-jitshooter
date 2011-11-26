@@ -8,6 +8,8 @@ struct GameModel
 
 GameModel * ModelLoad(cstring fname)
 {
+	LOG("Loading model ", fname);
+	
     GameModel * m = malloc(44);
     byte<64> filename;
 	byte * pfilename = filename;
