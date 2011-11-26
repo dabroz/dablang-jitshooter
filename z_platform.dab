@@ -162,11 +162,26 @@ int fflush(FILE * f);
 [crt]
 int fseek(FILE * stream, int offset, int origin);
 
-[crt]
-byte * malloc(uint32 size);
+extern ("call", "stdcall", "dll", "kernel32.dll", "name", "HeapAlloc") 
+byte * HeapAlloc(HANDLE hHeap, DWORD dwFlags, int dwBytes);
 
-[crt]
-void free(byte * ptr);
+extern ("call", "stdcall", "dll", "kernel32.dll", "name", "GetProcessHeap") 
+HANDLE GetProcessHeap();
+
+byte * malloc(uint32 size)
+{
+	LOG("malloc ", size);
+	byte * ret = HeapAlloc(GetProcessHeap(), 0, size);
+	int iret = ret;
+	LOG("malloc -> ", iret);
+	return ret;
+}
+
+void free(byte * ptr) 
+{	
+	// don't bother
+	ptr = 0; // due to weird bug
+}
 
 int g_Random = 0;
 
@@ -178,3 +193,4 @@ int rand()
 }
 
 const uint32 RAND_MAX = 0x7fff;
+
