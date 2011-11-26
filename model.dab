@@ -10,8 +10,12 @@ GameModel * ModelLoad(cstring fname)
 {
     GameModel * m = malloc(44);
     byte<64> filename;
-    sprintf(filename, "data\\%s.utm", fname);
-
+	byte * pfilename = filename;
+	reset(pfilename, 64);
+	append(pfilename, "data\\");
+	append(pfilename, fname);
+	append(pfilename, ".utm");
+    
     int len;
     byte * f = file_open(filename, &len);
     
@@ -53,7 +57,7 @@ GameModel * ModelLoad(cstring fname)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER, len - 8, cast<uint8*>(cast<int>iptr + 8), GL_STATIC_DRAW); 
                 m->count = (len - 8)/4;
-                printf("Vertex count: %d\n", m->count);
+				LOG("Vertex count: ", m->count);
             }
 
             if (type == 1) pos = 99999999;
