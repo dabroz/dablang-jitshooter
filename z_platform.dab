@@ -174,7 +174,13 @@ byte * malloc(uint32 size);
 [crt]
 void free(byte * ptr);
 
-[crt]
-int rand();
+int g_Random = 0;
+
+int rand()
+{
+	g_Random = g_Random * 214013;
+	g_Random = g_Random + 2531011;
+	return (g_Random / 0x10000) & 0x7fff;	
+}
 
 const uint32 RAND_MAX = 0x7fff;
