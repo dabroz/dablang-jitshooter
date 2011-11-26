@@ -71,6 +71,14 @@ void append(byte * buff, byte * text)
 		buff[i + start] = text[i];
 }
 
+void append(byte * buff, int a)
+{
+	byte<32> num;
+	byte * pnum = num;
+	itoa(a, pnum);
+	append(buff, pnum);
+}
+
 void SaveLog(byte * msg)
 {
 	byte* xptr = 0;
@@ -144,13 +152,10 @@ void itoa(int i, byte * a)
 void LOG(byte * msg, int a1)
 {
 	byte<1024> log;
-	byte<32> num;
 	byte * plog = log;
-	byte * pnum = num;
 	reset(plog, 1024);
 	append(plog, msg);
-	itoa(a1, pnum);
-	append(plog, pnum);
+	append(plog, a1);
 	SaveLog(plog);
 }
 

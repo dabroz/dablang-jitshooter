@@ -1,6 +1,9 @@
+version 0.2
+
+  * upgraded to Dab 0.2
+
 version 0.1.1 [2011.09.05]
 
   * name changed to "JIT Shooter"
   * score added (rendered using particles!)
-
 

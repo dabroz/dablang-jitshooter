@@ -8,14 +8,14 @@ cstring game_title = "JIT Shooter [controls: A/D/Space]";
 
 void memzero(byte * ptr1, uint32 size)
 {
-byte * ptr = ptr1;
-  for (int i = 0; i < size; i++) ptr1[i] = 0;
+	byte * ptr = ptr1;
+	for (int i = 0; i < size; i++) ptr1[i] = 0;
 }
 
 void ExitWithError(cstring s)
 {
-  printf("Error: %s\n", s);
-  ExitProcess(17);
+	LOG("Error: ", s);
+	ExitProcess(1);
 }
 
 int NULL = 0;
@@ -23,23 +23,16 @@ int NULL = 0;
 BOOL CenterWindow(HWND hwnd)
 {
 	RECT rect;
-	int width;
-    int height;      
-	int screenwidth;
-    int screenheight;
-	int x;
-    int y;
-
 	GetWindowRect(hwnd, &rect);
 
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
+	int width = rect.right - rect.left;
+	int height = rect.bottom - rect.top;
 
-	screenwidth = GetSystemMetrics(SM_CXSCREEN);
-	screenheight = GetSystemMetrics(SM_CYSCREEN);
+	int screenwidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenheight = GetSystemMetrics(SM_CYSCREEN);
 
-	x = (screenwidth - width)/2;
-	y = (screenheight - height)/2;
+	int x = (screenwidth - width)/2;
+	int y = (screenheight - height)/2;
 
 	MoveWindow(hwnd, x, y, width, height, 0);
 
@@ -48,7 +41,7 @@ BOOL CenterWindow(HWND hwnd)
 
 byte * EMPTY_WND_PROC;
 
-void myglcreatecontext()
+void StartOpenGL()
 {	
 	HGLRC		hRC=0;			
 	HINSTANCE	hInstance;		
@@ -189,8 +182,7 @@ int main()
 {
 	LOG("Running JIT shooter...");
 	
-    myglcreatecontext();
-    //cstring qq = glGetString(GL_VERSION);
+    StartOpenGL();
 	LOG("Using OpenGL: ", glGetString(GL_VERSION));
 
     GameInit();
