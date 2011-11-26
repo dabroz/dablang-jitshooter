@@ -1,15 +1,3 @@
-byte * loader_crt(cstring name)
-{
-	FILE * ptr = 0;
-	globallog = ptr;
-
-	byte * base = LoadLibrary("MSVCR71.dll");
-	return GetProcAddress(base, name);	
-}
-
-cstring loader_crt_cdecl = "cdecl";
-int loader_crt_priority = 1;
-
 byte * globallog;
 
 void LOG(cstring msg)
@@ -141,10 +129,7 @@ HANDLE GetProcessHeap();
 byte * malloc(uint32 size)
 {
 	LOG("malloc ", size);
-	byte * ret = HeapAlloc(GetProcessHeap(), 0, size);
-	int iret = ret;
-	LOG("malloc -> ", iret);
-	return ret;
+	return HeapAlloc(GetProcessHeap(), 0, size);
 }
 
 void free(byte * ptr) 

@@ -1,29 +1,113 @@
-struct FILE
-{
-int dummy;
-};
+typedef int FILE;
 
+const uint32 SEEK_SET = 0;
 const uint32 SEEK_CUR = 1;
 const uint32 SEEK_END = 2;
-const uint32 SEEK_SET = 0;
 
-[crt]
-FILE * fopen(byte * filename, byte * mode);
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "CreateFileA") 
+HANDLE CreateFile(
+byte * lpFileName, 
+DWORD dwDesiredAccess,
+DWORD dwShareMode,
+DWORD lpSecurityAttributes,
+DWORD dwCreationDisposition,
+DWORD dwFlagsAndAttributes,
+HANDLE hTemplateFile
+);
 
-[crt]
-int fclose(FILE * stream);
+const uint32 GENERIC_READ                     =0x80000000;
+const uint32 GENERIC_WRITE                    =0x40000000;
+const uint32 GENERIC_EXECUTE                  =0x20000000;
+const uint32 GENERIC_ALL                      =0x10000000;
 
-[crt]
-uint32 fread(byte * ptr, uint32 size, uint32 count, FILE * stream);
+const uint32 CREATE_ALWAYS = 2;
+const uint32 OPEN_EXISTING = 3;
 
-[crt]
-uint32 fwrite(byte * ptr, uint32 size, uint32 count, FILE * stream);
+FILE * fopen(byte * filename, byte * bmode)
+{
+	int mode = GENERIC_READ;
+	int flag = OPEN_EXISTING;
+	if (bmode[0] == 119 /* w */)
+	{
+		mode = GENERIC_WRITE;
+		flag = CREATE_ALWAYS;
+	}
+	HANDLE h = CreateFile(filename, mode, 0, 0, flag, 0, 0);
+	return h;
+}
 
-[crt]
-int32 ftell(FILE * stream);
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "CloseHandle") 
+BOOL CloseHandle(HANDLE hObject);
 
-[crt]
-int fflush(FILE * f);
+int fclose(FILE * stream)
+{
+	CloseHandle(stream);
+}
 
-[crt]
-int fseek(FILE * stream, int offset, int origin);
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "ReadFile") 
+BOOL ReadFile(
+  HANDLE hFile,
+  byte * lpBuffer,
+  int nNumberOfBytesToRead,
+  int * lpNumberOfBytesRead,
+  byte * lpOverlapped
+);
+
+uint32 fread(byte * ptr, uint32 size, uint32 count, FILE * stream)
+{
+	int ret = 0;
+	int ff = stream;
+	int * NULLPTR;
+	NULLPTR = 0;
+	ReadFile(ff, ptr, size * count, &ret, NULLPTR);
+	return ret;
+}
+
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "WriteFile") 
+BOOL WriteFile(
+  HANDLE hFile,
+  byte * lpBuffer,
+  int nNumberOfBytesToWrite,
+  int * lpNumberOfBytesWritten,
+  byte * lpOverlapped
+);
+
+uint32 fwrite(byte * ptr, uint32 size, uint32 count, FILE * stream)
+{
+	int ret = 0;
+	int ff = stream;
+	int * NULLPTR;
+	NULLPTR = 0;
+	WriteFile(ff, ptr, size * count, &ret, NULLPTR);
+	return ret;
+}
+
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "FlushFileBuffers") 
+BOOL FlushFileBuffers(
+HANDLE hFile
+);
+
+int fflush(FILE * f)
+{
+	return FlushFileBuffers(f);
+}
+
+extern ("call", "stdcall", "dll", "Kernel32.dll", "name", "SetFilePointer") 
+DWORD SetFilePointer(
+  HANDLE hFile,
+  int lDistanceToMove,
+  byte * lpDistanceToMoveHigh,
+  DWORD dwMoveMethod
+);
+
+int fseek(FILE * stream, int offset, int origin)
+{
+	int * NULLPTR;
+	NULLPTR = 0;
+	return SetFilePointer(stream, offset, NULLPTR, origin);
+}
+
+int32 ftell(FILE * stream)
+{
+	return fseek(stream, 0, SEEK_CUR);
+}
