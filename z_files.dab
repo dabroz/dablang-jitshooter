@@ -1,0 +1,29 @@
+struct FILE
+{
+int dummy;
+};
+
+const uint32 SEEK_CUR = 1;
+const uint32 SEEK_END = 2;
+const uint32 SEEK_SET = 0;
+
+[crt]
+FILE * fopen(byte * filename, byte * mode);
+
+[crt]
+int fclose(FILE * stream);
+
+[crt]
+uint32 fread(byte * ptr, uint32 size, uint32 count, FILE * stream);
+
+[crt]
+uint32 fwrite(byte * ptr, uint32 size, uint32 count, FILE * stream);
+
+[crt]
+int32 ftell(FILE * stream);
+
+[crt]
+int fflush(FILE * f);
+
+[crt]
+int fseek(FILE * stream, int offset, int origin);
