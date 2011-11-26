@@ -48,12 +48,12 @@ void renderDigit(int pos, int digit)
 
 int renderNumber(int num)
 {
-	byte<32> digits;
+	byte<6> digits;
 	byte * dptr = digits;
-	sprintf(dptr, "%5d", num);
-	int l = length(dptr);
+	itoa(num, dptr);
+	int l = length(digits);
 	for (int i = 0; i < l; i++)
 	{
-		renderDigit(i, dptr[i] - 48);
+		renderDigit(5 - l + i, dptr[i] - 48);
     }
 }

@@ -10,12 +10,6 @@ byte * loader_crt(cstring name)
 cstring loader_crt_cdecl = "cdecl";
 int loader_crt_priority = 1;
 
-[crt]
-void printf(cstring format, ...);
-
-[crt]
-int sprintf(byte * ptr, cstring format, ...);
-
 struct FILE
 {
 int dummy;

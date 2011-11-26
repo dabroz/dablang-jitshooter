@@ -69,7 +69,7 @@ GameShader * ShaderLoad(cstring fname)
     {
         GLchar *log = malloc(logLength);
         glGetProgramInfoLog(m->program, logLength, &logLength, log);
-        printf("Program link log:\n%s", log);
+        LOG("Program link log:\n", log);
         free(log);
     }
     
