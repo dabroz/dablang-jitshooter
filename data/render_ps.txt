@@ -5,7 +5,7 @@ varying vec2 xuv;
 
 void main()
 {
-	vec4 r = texture(tex, xuv);
+	vec4 r = texture2D(tex, xuv);
 	r.a = 1.0;
 	gl_FragColor = r;
 }

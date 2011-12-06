@@ -12,22 +12,20 @@ void main()
 {
 	uv = In_UV.xy;
 
-	vec4 qq = mvp * vec4(In_Position.xyz,1.0);
+	vec4 qq = mvp * vec4(In_Position.xyz, 1.0);
 	vec3 cent = qq.xyz / qq.w;
 
-if (In_Position.y < 0) cent = vec3(In_Position.x, In_Position.z, 0);
+	if (In_Position.y < 0.0) cent = vec3(In_Position.x, In_Position.z, 0.0);
 
 	vec2 ssc = vec2(3.0 / 4.0 * In_UV.w, 1.0);
 
 	vec4 pppx;
 	pppx.xy = cent.xy + 0.05 * In_UV.z * uv * ssc;
-	pppx.z =0;
-	pppx.w = 1;
+	pppx.z = 0.0;
+	pppx.w = 1.0;
 
 	color= In_Color;
-	if (In_UV.z < 0) { color.a = 1; pppx.z = 0.99999; }
+	if (In_UV.z < 0.0) { color.a = 1.0; pppx.z = 0.99999; }
 
-	gl_Position =pppx;
-
-	
+	gl_Position = pppx;
 }
