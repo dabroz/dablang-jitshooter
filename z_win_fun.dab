@@ -76,4 +76,3 @@ BOOL QueryPerformanceFrequency(int64 *lpFrequency);
 
 extern ("call", "stdcall", "dll", "kernel32.dll", "name", "ExitProcess") 
 void ExitProcess(UINT uExitCode);
-

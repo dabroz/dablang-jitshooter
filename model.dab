@@ -128,4 +128,3 @@ void RenderModelX(GameModel * m, pos p1, float rotZ, float rotY)
 	
 	glPopMatrix();
 }
-

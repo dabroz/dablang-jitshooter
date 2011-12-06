@@ -59,4 +59,3 @@ int LoadTextureF(byte* fn)
     
     return ret;
 }
-

@@ -68,4 +68,3 @@ const uint32 GL_VALIDATE_STATUS        = 0x00008b83;
 const uint32 GL_VERSION                = 0x00001f02;
 const uint32 GL_VERTEX_SHADER          = 0x00008b31;
 const uint32 GL_ZERO                   = 0x00000000;
-

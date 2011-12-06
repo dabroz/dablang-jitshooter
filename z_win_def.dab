@@ -32,4 +32,3 @@ const uint32 WS_EX_WINDOWEDGE   = 0x00000100;
 const uint32 WS_MINIMIZEBOX     = 0x00020000;
 const uint32 WS_OVERLAPPED      = 0x00000000;
 const uint32 WS_SYSMENU         = 0x00080000;
-
