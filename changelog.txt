@@ -1,6 +1,8 @@
 version 0.2
 
   * upgraded to Dab 0.2
+  * compatible with OpenGL 2 hardware
+  * fixed bug with particles on some PCs
 
 version 0.1.1 [2011.09.05]
 
