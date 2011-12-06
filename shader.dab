@@ -60,7 +60,13 @@ GameShader * ShaderLoad(cstring fname)
 	
 	glAttachShader(m->program, ps);
 	glAttachShader(m->program, vs);
-		
+	
+	glBindAttribLocation(m->program, 0, "In_Position");
+	glBindAttribLocation(m->program, 1, "In_Normal");
+	glBindAttribLocation(m->program, 1, "In_UV");	
+	glBindAttribLocation(m->program, 2, "In_Texcoord");
+	glBindAttribLocation(m->program, 2, "In_Color");
+	
 	glLinkProgram(m->program);
 	
 	GLint logLength;

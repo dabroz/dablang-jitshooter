@@ -96,3 +96,5 @@ bool loader_opengl_auto = false;
 [opengl] void glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, float * value);
 [opengl] void glUniform1i(GLint location, int v);
 [opengl] void glBufferSubData(GLenum  target,  GLintptr  offset,  GLsizeiptr  size,  byte *  data);
+
+[opengl] void glBindAttribLocation(GLuint program, GLuint index, cstring name);

@@ -1,15 +1,12 @@
-#version 150
-#extension GL_ARB_explicit_attrib_location : enable
-
-layout (location = 0) in vec3 In_Position;
-layout (location = 1) in vec4 In_UV;
-layout (location = 2) in vec4 In_Color;
+attribute vec3 In_Position;
+attribute vec4 In_UV;
+attribute vec4 In_Color;
 
 uniform mat4 mvp;
 uniform mat4 modelview;
 
-out vec2 uv;
-out vec4 color;
+varying vec2 uv;
+varying vec4 color;
 
 void main()
 {
